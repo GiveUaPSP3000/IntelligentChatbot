@@ -11,17 +11,27 @@ def value_find(st):
     :param st: original text
     :return: real money spend or False
     """
-    ste = re.findall(
+    ste_p = re.findall(
         "[一二两三四五六七八九][十百千万元块毛角新分\.,，][十百千零元块毛角新分\.,，一二三四五六七八九]*|[十][一二三四五六七八九元块毛角新分\.,，]+|[1-9][0-9]*[元块新角毛分\.,，0-9一二两三四五六七八九十]*",
         st)
     key_words = ['花了', '用了', '给了', '赚了', '付了', '转了', '亏了', '刷了', '借了', '交了', '得了', '收入', '用掉', '掉了']
     money_words = ['元', '块', '新', '分', '角', '毛']
     # 确定是否有多个结果
-    if len(ste) > 1:
-        if len(ste) == 2:
-            if st.find(ste[0]) + len(ste[0]) == st.find(ste[1]):
-                return ste[0] + ste[1]
+    if len(ste_p) > 1:
+        loop_l = len(ste_p) - 2
+        ste = []
+        for r in range(0, loop_l):
+            if st.find(ste_p[r]) + len(ste_p[r]) == st.find(ste_p[r + 1]):
+                ste.append(ste_p[r] + ste_p[r+1])
+                r += 1
+            else:
+                ste.append(ste_p[r])
+        if st.find(ste_p[-2]) + len(ste_p[-2]) == st.find(ste_p[-1]):
+            ste.append(ste_p[-2] + ste_p[-1])
         else:
+            ste.append(ste_p[-2])
+            ste.append(ste_p[-1])
+        if len(ste) > 1:
             index_re = []
             # 查找离key_words最近的表达
             for money in ste:
@@ -39,8 +49,10 @@ def value_find(st):
                         return money.replace(',', '').replace('，', '')
             # 如果没有则返回错误
             return False
+        else:
+            return ste[0].replace(',', '').replace('，', '')
     else:
-        return ste[0].replace(',', '').replace('，', '')
+        return ste_p[0].replace(',', '').replace('，', '')
 
 
 def _trans(s):
