@@ -113,39 +113,12 @@ def time_get(now_time, text):
         '昨天': -1,
         '前天': -2,
     }
-    # check the year
-    for i in year_cv:
-        if i in text:
-            de_y = year_cv[i]
-            real_y = (now_time + dateutil.relativedelta.relativedelta(years=de_y)).year
-            break
-    if de_y == 1:
-        ste = re.findall('\d+年', text)
-        if len(ste):
-            real_y = int(ste[0].strip('年'))
-        else:
-            real_y = now_time.year
-
-    # check the month
-    for i in month_cv:
-        if i in text:
-            de_m = month_cv[i]
-            real_m = (now_time + dateutil.relativedelta.relativedelta(months=de_m)).month
-            state = 2
-            break
-    if de_m == 1:
-        ste = re.findall('\d+月', text)
-        if len(ste):
-            real_m = int(ste[0].strip('月'))
-            state = 2
-        else:
-            real_m = now_time.month
-
     # check the day
     for i in day_cv:
         if i in text:
             de_d = day_cv[i]
-            real_d = (now_time + dateutil.relativedelta.relativedelta(days=de_d)).day
+            now_time = now_time + dateutil.relativedelta.relativedelta(days=de_d)
+            real_d = now_time.day
             state = 3
             break
     if de_d == 1:
@@ -160,6 +133,35 @@ def time_get(now_time, text):
                 state = 3
             else:
                 real_d = now_time.day
+
+    # check the month
+    for i in month_cv:
+        if i in text:
+            de_m = month_cv[i]
+            now_time = now_time + dateutil.relativedelta.relativedelta(months=de_m)
+            real_m = now_time.month
+            state = 2
+            break
+    if de_m == 1:
+        ste = re.findall('\d+月', text)
+        if len(ste):
+            real_m = int(ste[0].strip('月'))
+            state = 2
+        else:
+            real_m = now_time.month
+
+    # check the year
+    for i in year_cv:
+        if i in text:
+            de_y = year_cv[i]
+            real_y = (now_time + dateutil.relativedelta.relativedelta(years=de_y)).year
+            break
+    if de_y == 1:
+        ste = re.findall('\d+年', text)
+        if len(ste):
+            real_y = int(ste[0].strip('年'))
+        else:
+            real_y = now_time.year
 
     return state, real_y, real_m, real_d
 
