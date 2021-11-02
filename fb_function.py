@@ -24,13 +24,13 @@ matplotlib.rc("font", family='YouYuan')
 tzinfo = pytz.timezone('Asia/Shanghai')
 
 # Facebook Token
-fb_token = "EAAGhxNiNSwoBABqKjX1IzeYWZCPtBcieMaluGSgELTBL1QJZCmYpbghTmwYqmikxoQwZCUAehD1WErpUTsynZCYs1kJn8cZBtoyPLMW64XzfFKtVL0ZBpvzk6woSZA3q5lt5l7mzo9szUDMqCW4ZBz9Gi1PB2z1uL2X4ZA8bV9F0VxnmCgGxywlG3"
+fb_token = ""
 
 # link to Baidu api
 """ APPID AK SK """
-APP_ID = '25077257'
-API_KEY = 'mepq9gX1KTcrykrf7qGxeXeg'
-SECRET_KEY = '3DDn4nGG8aRXWioTEWIji6IqvcksmHX9'
+APP_ID = ''
+API_KEY = ''
+SECRET_KEY = ''
 client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
 # link to mongoDB
