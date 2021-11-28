@@ -24,3 +24,8 @@ About the program flow chart and the technology stack:
 ## VIDEOS
 ----
 [![EZcharge](https://res.cloudinary.com/marcomontalbano/image/upload/v1636293996/video_to_markdown/images/youtube--RXM_PunUZbo-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=RXM_PunUZbo "EZcharge")
+
+----
+## Performance
+----
+This is really a very fast and accurate bookkeeping software. "今天原价35块钱8斤的橙子我花了31块七毛五就买下来了8斤". For such a complicated sentence, it can still accurately extract the actual description of the date, the type of accounting and the exact amount.
